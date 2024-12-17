@@ -6,6 +6,9 @@ WORKDIR /app
 
 # Копируем pom.xml и загружаем зависимости
 COPY pom.xml .
+COPY mvnw .
+COPY mvnw.cmd .
+COPY .mvn .mvn
 RUN ./mvnw dependency:go-offline
 
 # Копируем исходный код и строим приложение
