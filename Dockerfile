@@ -9,6 +9,9 @@ COPY pom.xml .
 COPY mvnw .
 COPY mvnw.cmd .
 COPY .mvn .mvn
+
+RUN chmod +x mvnw
+
 RUN ./mvnw dependency:go-offline
 
 # Копируем исходный код и строим приложение
