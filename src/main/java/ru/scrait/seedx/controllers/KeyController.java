@@ -48,6 +48,10 @@ public class KeyController {
             return ResponseEntity.ok(Map.of("allowed", false));
         }
 
+        if (!key.isSub()) {
+            return ResponseEntity.ok(Map.of("allowed", request.getCoin().equals(Key.CryptoCurrency.TRON)));
+        }
+
         boolean isAllowed = key.getCurrencies().contains(request.getCoin());
 
         return ResponseEntity.ok(Map.of("allowed", isAllowed));
