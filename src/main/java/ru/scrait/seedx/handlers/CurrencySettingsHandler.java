@@ -3,6 +3,7 @@ package ru.scrait.seedx.handlers;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import ru.scrait.seedx.controllers.KeyWebSocketHandler;
 import ru.scrait.seedx.keyboards.CurrencySettingsKeyboard;
 import ru.scrait.seedx.models.Key;
 import ru.scrait.seedx.services.MessageService;
@@ -15,10 +16,12 @@ public class CurrencySettingsHandler implements IHandler {
 
     private final CurrencySettingsKeyboard currencySettingsKeyboard;
     private final KeyService keyService;
+    private final KeyWebSocketHandler webSocketHandler;
 
-    public CurrencySettingsHandler(CurrencySettingsKeyboard currencySettingsKeyboard, KeyService keyService) {
+    public CurrencySettingsHandler(CurrencySettingsKeyboard currencySettingsKeyboard, KeyService keyService, KeyWebSocketHandler webSocketHandler) {
         this.currencySettingsKeyboard = currencySettingsKeyboard;
         this.keyService = keyService;
+        this.webSocketHandler = webSocketHandler;
     }
 
     @Override
@@ -78,5 +81,6 @@ public class CurrencySettingsHandler implements IHandler {
 
         // Save the updated key to the database
         keyService.saveKey(key);  // Save the updated key entity to the database
+        webSocketHandler.broadcastUpdatedCoins(key);
     }
 }

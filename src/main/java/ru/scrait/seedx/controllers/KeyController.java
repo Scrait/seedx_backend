@@ -1,5 +1,6 @@
 package ru.scrait.seedx.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.scrait.seedx.dtos.CoinCheckRequest;
@@ -11,7 +12,6 @@ import ru.scrait.seedx.repositories.KeyRepository;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/keys")
@@ -19,6 +19,7 @@ public class KeyController {
 
     private final KeyRepository keyRepository;
 
+    @Autowired
     public KeyController(KeyRepository keyRepository) {
         this.keyRepository = keyRepository;
     }
@@ -48,7 +49,7 @@ public class KeyController {
         }
 
         boolean isAllowed = key.getCurrencies().contains(request.getCoin());
+
         return ResponseEntity.ok(Map.of("allowed", isAllowed));
     }
-
 }

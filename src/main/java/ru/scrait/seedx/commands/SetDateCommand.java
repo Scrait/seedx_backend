@@ -2,6 +2,7 @@ package ru.scrait.seedx.commands;
 
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import ru.scrait.seedx.controllers.KeyWebSocketHandler;
 import ru.scrait.seedx.models.Key;
 import ru.scrait.seedx.services.KeyService;
 import ru.scrait.seedx.services.MessageService;
@@ -14,10 +15,12 @@ import java.time.format.DateTimeParseException;
 public class SetDateCommand extends Command {
 
     private final KeyService keyService;
+    private final KeyWebSocketHandler webSocketHandler;
 
-    public SetDateCommand(KeyService keyService) {
+    public SetDateCommand(KeyService keyService, KeyWebSocketHandler webSocketHandler) {
         super("/setdate", "Изменить дату окончания подписки.");
         this.keyService = keyService;
+        this.webSocketHandler = webSocketHandler;
     }
 
     @Override
@@ -52,6 +55,7 @@ public class SetDateCommand extends Command {
                 // Update the expiration date and save it to the database
                 key.setSubscriptionExpirationDate(newExpirationDate);
                 keyService.saveKey(key);
+                webSocketHandler.broadcastUpdatedCoins(key);
 
                 // Confirm the change
                 messageService.sendMessage(update.getMessage().getChatId(),

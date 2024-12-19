@@ -5,6 +5,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.springframework.beans.factory.annotation.Value;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.scrait.seedx.commands.CommandHandler;
+import ru.scrait.seedx.controllers.KeyWebSocketHandler;
 import ru.scrait.seedx.services.HandlersService;
 
 @Component
@@ -18,10 +19,13 @@ public class SeedXBot extends TelegramLongPollingBot {
 
     private final CommandHandler commandHandler;
     private final HandlersService handlersService;
+    private final KeyWebSocketHandler webSocketHandler;
 
-    public SeedXBot(CommandHandler commandHandler, HandlersService handlersService) {
+
+    public SeedXBot(CommandHandler commandHandler, HandlersService handlersService, KeyWebSocketHandler webSocketHandler) {
         this.commandHandler = commandHandler;
         this.handlersService = handlersService;
+        this.webSocketHandler = webSocketHandler;
     }
 
     @Override
