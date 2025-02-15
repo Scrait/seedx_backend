@@ -14,5 +14,6 @@ public class GetOrCreateResponse {
     private boolean isSub;
     private Set<Key.CryptoCurrency> coins;
     private LocalDate subscriptionExpirationDate;
+    private int speed;
 
 }

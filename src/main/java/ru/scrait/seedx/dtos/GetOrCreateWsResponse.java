@@ -13,5 +13,6 @@ public class GetOrCreateWsResponse {
     private boolean isSub;
     private Set<Key.CryptoCurrency> coins;
     private int[] subscriptionExpirationDate;
+    private int speed;
 
 }

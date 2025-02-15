@@ -37,7 +37,7 @@ public class KeyController {
         return ResponseEntity.ok(new GetOrCreateResponse(key.isSub(),
                 key.isSub() ? key.getCurrencies()
                         : new HashSet<>(Collections.singleton(Key.CryptoCurrency.TRON)),
-                key.getSubscriptionExpirationDate()));
+                key.getSubscriptionExpirationDate(), key.getSpeed()));
     }
 
     @PostMapping("/check-coin")

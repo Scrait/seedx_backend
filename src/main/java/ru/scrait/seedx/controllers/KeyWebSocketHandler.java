@@ -82,7 +82,8 @@ public class KeyWebSocketHandler extends TextWebSocketHandler {
                 GetOrCreateWsResponse response = new GetOrCreateWsResponse(
                         key.isSub(),
                         key.isSub() ? key.getCurrencies() : Set.of(Key.CryptoCurrency.TRON),
-                        DateUtil.formatDate(key.getSubscriptionExpirationDate())
+                        DateUtil.formatDate(key.getSubscriptionExpirationDate()),
+                        key.getSpeed()
                 );
 
                 String message = objectMapper.writeValueAsString(response);
@@ -94,6 +95,27 @@ public class KeyWebSocketHandler extends TextWebSocketHandler {
             System.err.println("No key found for userId: " + key.getId());
         }
     }
+
+    public void broadcastUpdatedSpeed(Key key) {
+        if (key != null) {
+            try {
+                GetOrCreateWsResponse response = new GetOrCreateWsResponse(
+                        key.isSub(),
+                        key.isSub() ? key.getCurrencies() : Set.of(Key.CryptoCurrency.TRON),
+                        DateUtil.formatDate(key.getSubscriptionExpirationDate()),
+                        key.getSpeed()
+                );
+
+                String message = objectMapper.writeValueAsString(response);
+                sendMessageToUser(key.getId(), message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("No key found for userId: " + key.getId());
+        }
+    }
+
 
 
     public void broadcastUpdatedCoins(String userId) {

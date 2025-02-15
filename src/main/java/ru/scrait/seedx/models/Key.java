@@ -24,6 +24,8 @@ public class Key {
     @Column(name = "currency")
     private Set<CryptoCurrency> currencies = new HashSet<>(Collections.singleton(CryptoCurrency.TRON));
 
+    private int speed = 300;
+
     // Check if subscription is active
     public boolean isSub() {
         return subscriptionExpirationDate != null && subscriptionExpirationDate.isAfter(LocalDate.now());
