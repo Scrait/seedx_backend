@@ -96,6 +96,14 @@ public class KeyWebSocketHandler extends TextWebSocketHandler {
         }
     }
 
+    public void broadcastClearAll(Key key) {
+        if (key != null) {
+            sendMessageToUser(key.getId(), "clear");
+        } else {
+            System.err.println("No key found for userId: " + key.getId());
+        }
+    }
+
     public void broadcastUpdatedSpeed(Key key) {
         if (key != null) {
             try {
