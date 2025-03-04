@@ -29,7 +29,7 @@ public class StartCommand extends Command {
                         "\n" +
                         "4. `/setgeneration <keyId> <speed>` - Изменить скорость генерации у пользователя. Чем больше значение, тем медленнее генерация.\n" +
                         "   По умолчанию: 300.\n" +
-                        "   Пример использования: /setgeneration 2bae4db60fdb667f97760806298a8279 500\n" +
+                        "   Пример использования: /setgeneration 2bae4db60fdb667f97760806298a8279 500\n\n" +
                         "5. `/clear <keyId>` - Очистить найденные сиды.\n" +
                         "   Пример использования: /clear 2bae4db60fdb667f97760806298a8279\n");
     }
